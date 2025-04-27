@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reaction Time Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Instructions -->
+  <div id="instruction-modal" class="modal">
+    <div class="modal-content">
+      <h2>Reaction Time Tap Game</h2>
+      <p>When the screen turns green, tap as quickly as you can!</p>
+      <button onclick="startGame()">Start</button>
+    </div>
+  </div>
+
+  <!-- Game area -->
+  <div id="game-area" class="game-area">
+    <div id="message">Wait for green...</div>
+  </div>
+
+ <!-- Result modal -->
+<div id="result-modal" class="modal">
+  <div class="modal-content">
+    <h2>Great Job!</h2>
+    <p>Your average reaction time: <span id="average-time">0</span> ms</p>
+    <p>Your score: <span id="reaction-score">0</span>/10</p>
+    <div id="reaction-emoji" style="font-size: 3rem;">⚡</div>
+    <p id="reaction-message">You're super fast!</p>
+    <button onclick="restartGame()">Play Again</button>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
