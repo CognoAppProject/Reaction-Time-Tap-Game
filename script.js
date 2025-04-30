@@ -16,10 +16,8 @@ function startRound() {
   document.getElementById('message').innerText = "Wait for green...";
   document.getElementById('game-area').style.backgroundColor = "red";
 
-  // Early tap listener
   document.getElementById('game-area').onclick = () => {
     if (!isGreen) {
-      // Clicked too early!
       document.getElementById('message').innerText = "Too Soon!";
       clearTimeout(timeoutId);
       setTimeout(startRound, 1000);
@@ -33,7 +31,6 @@ function startRound() {
     document.getElementById('message').innerText = "TAP!";
     startTime = new Date().getTime();
 
-    // Overwrite the early click with reaction tap
     document.getElementById('game-area').onclick = () => {
       const reactionTime = new Date().getTime() - startTime;
       reactionTimes.push(reactionTime);
@@ -47,6 +44,7 @@ function startRound() {
     };
   }, delay);
 }
+
 function getScore(avg) {
   if (avg < 250) return 10;
   if (avg < 500) return 8;
@@ -98,8 +96,13 @@ function endGame() {
 
   document.getElementById('result-modal').style.display = 'flex';
   showConfetti();
-}
 
+  // ✅ Submit to Android interface if available
+  if (window.Android && Android.submitResult) {
+    Android.submitResult("Reaction Time Tap Game", score, avg);
+    console.log(`Submitted to Android: Score = ${score}, Avg Time = ${avg}ms`);
+  }
+}
 
 function restartGame() {
   reactionTimes = [];
